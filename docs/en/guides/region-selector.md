@@ -14,27 +14,27 @@ The Region Selector is an interactive tool that allows you to draw polygon regio
 
 ## Key Features
 
-- **Interactive polygon drawing** on video frames  
-- **Visual feedback** with numbered points and connecting lines  
-- **Undo capability** to remove incorrectly placed points  
-- **Display detection** for headless environment compatibility  
+- **Interactive polygon drawing** on video frames
+- **Visual feedback** with numbered points and connecting lines
+- **Undo capability** to remove incorrectly placed points
+- **Display detection** for headless environment compatibility
 
 ## Mouse and Keyboard Controls
 
-| Control | Action |
-|--------|--------|
-| **Left Click** | Add a new point to the polygon |
-| **Right Click** | Remove the last added point (undo) |
-| **Enter** | Confirm the selection (minimum 3 points required) |
-| **ESC** | Cancel selection and exit |
+| Control         | Action                                            |
+| --------------- | ------------------------------------------------- |
+| **Left Click**  | Add a new point to the polygon                    |
+| **Right Click** | Remove the last added point (undo)                |
+| **Enter**       | Confirm the selection (minimum 3 points required) |
+| **ESC**         | Cancel selection and exit                         |
 
 ## Headless Environment Handling
 
 The Region Selector requires a display to show the interactive window. When running in headless environments (servers or Docker containers without a display), the tool will:
 
-1. Check for display availability using `check_imshow()`  
-2. Raise a `RuntimeError` with a clear message if no display is available  
-3. Suggest providing region coordinates directly as an alternative  
+1. Check for display availability using `check_imshow()`
+2. Raise a `RuntimeError` with a clear message if no display is available
+3. Suggest providing region coordinates directly as an alternative
 
 !!! warning "Headless Environments"
 
@@ -85,17 +85,17 @@ The Region Selector requires a display to show the interactive window. When runn
 
 The selected region (a list of point tuples) can be used with various Ultralytics solutions:
 
-| Solution | Use Case |
-|----------|----------|
-| [Object Counter](object-counting.md) | Count objects within the region |
-| [Region Counter](region-counting.md) | Count objects within the region |
-| [Heatmap](heatmaps.md) | Visualize activity within specific areas |
-| [Queue Management](queue-management.md) | Monitor queue areas |
+| Solution                                | Use Case                                 |
+| --------------------------------------- | ---------------------------------------- |
+| [Object Counter](object-counting.md)    | Count objects within the region          |
+| [Region Counter](region-counting.md)    | Count objects within the region          |
+| [Heatmap](heatmaps.md)                  | Visualize activity within specific areas |
+| [Queue Management](queue-management.md) | Monitor queue areas                      |
 
 ## Arguments
 
-| Argument | Type | Default | Description |
-|----------|------|---------|-------------|
-| `video_path` | `str` | — | Path to the video file |
+| Argument     | Type  | Default | Description            |
+| ------------ | ----- | ------- | ---------------------- |
+| `video_path` | `str` | —       | Path to the video file |
 
 **Returns:** `list` of tuples `[(x1, y1), (x2, y2), ...]` or `None` if cancelled.
