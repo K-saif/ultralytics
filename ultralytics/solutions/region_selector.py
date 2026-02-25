@@ -1,4 +1,4 @@
-import cv2
+import numpy as np
 
 from ultralytics.utils import LOGGER
 from ultralytics.utils.checks import check_imshow
@@ -37,6 +37,7 @@ class RegionSelector:
             flags: OpenCV event flags.
             param: Additional parameters.
         """
+        import cv2
         if event == cv2.EVENT_LBUTTONDOWN:
             self.points.append((x, y))
             LOGGER.info(f"Point {len(self.points)} added: ({x}, {y})")
@@ -50,6 +51,7 @@ class RegionSelector:
 
     def draw_polygon(self):
         """Draw the current polygon on the image."""
+        import cv2
         self.image = self.original_image.copy()
 
         # Draw existing points
@@ -70,36 +72,21 @@ class RegionSelector:
 
         # Display instructions
         text_y = 30
-        cv2.putText(
-            self.image,
-            "LEFT CLICK: Add point | RIGHT CLICK: Remove last point",
-            (10, text_y),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.6,
-            (255, 255, 255),
-            2,
-        )
-        cv2.putText(
-            self.image,
-            "ENTER: Confirm | ESC: Cancel",
-            (10, text_y + 30),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            0.6,
-            (255, 255, 255),
-            2,
-        )
-        cv2.putText(
-            self.image, f"Points: {len(self.points)}", (10, text_y + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2
-        )
+        cv2.putText(self.image, "LEFT CLICK: Add point | RIGHT CLICK: Remove last point",
+                   (10, text_y), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+        cv2.putText(self.image, "ENTER: Confirm | ESC: Cancel",
+                   (10, text_y + 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+        cv2.putText(self.image, f"Points: {len(self.points)}",
+                   (10, text_y + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
         cv2.imshow("Region Selector", self.image)
 
     def select_region(self):
         """Main function to select region from first frame.
-
         Returns:
             list: List of selected polygon points as tuples, or None if cancelled.
         """
+        import cv2
         # Check if display is available for imshow
         if not check_imshow(warn=True):
             raise RuntimeError(
