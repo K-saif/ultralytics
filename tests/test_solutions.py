@@ -369,3 +369,12 @@ def test_display_output_method():
         mock_imshow.assert_called_once()
         mock_wait.assert_called_once()
         mock_destroy.assert_called_once()
+
+
+def test_region_selector_headless():
+    """Ensure RegionSelector exits cleanly in headless environments."""
+    from ultralytics.solutions import select_region
+
+    with patch("ultralytics.solutions.region_selector.check_imshow", return_value=False):
+        with pytest.raises(RuntimeError):
+            select_region("dummy.mp4")
