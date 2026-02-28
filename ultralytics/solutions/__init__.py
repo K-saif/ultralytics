@@ -44,14 +44,14 @@ __all__ = (
 
 
 def select_region(video_path):
-    # Lazy import to avoid cv2 side-effects at module import time
+    """Lazily import and call select_region to avoid cv2 side-effects at import time."""
     from .region_selector import select_region as _select_region
 
     return _select_region(video_path)
 
 
 def RegionSelector(*args, **kwargs):
-    # Lazy import to avoid cv2 side-effects at module import time
+    """Lazily import and return RegionSelector to avoid cv2 side-effects at import time."""
     from .region_selector import RegionSelector as _RegionSelector
 
     return _RegionSelector(*args, **kwargs)
