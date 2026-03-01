@@ -43,15 +43,14 @@ __all__ = (
 )
 
 
-def select_region(video_path):
-    """Lazily import and call select_region to avoid cv2 side-effects at import time."""
-    from .region_selector import select_region as _select_region
+def __getattr__(name):
+    """Lazily import RegionSelector and select_region to avoid cv2 side-effects at import time."""
+    if name == "RegionSelector":
+        from .region_selector import RegionSelector
 
-    return _select_region(video_path)
+        return RegionSelector
+    if name == "select_region":
+        from .region_selector import select_region
 
-
-def RegionSelector(*args, **kwargs):
-    """Lazily import and return RegionSelector to avoid cv2 side-effects at import time."""
-    from .region_selector import RegionSelector as _RegionSelector
-
-    return _RegionSelector(*args, **kwargs)
+        return select_region
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
