@@ -54,3 +54,7 @@ def __getattr__(name):
 
         return select_region
     raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+def __dir__():
+    """Ensure lazy attributes appear in dir() and IDE autocomplete."""
+    return sorted(list(globals().keys()) + ["RegionSelector", "select_region"])
