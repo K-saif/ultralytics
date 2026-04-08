@@ -25,7 +25,14 @@ class RegionSelector:
         self.image = None
         self.original_image = None
 
-    def mouse_callback(self, event, x, y, flags, param):
+    def mouse_callback(
+        self,
+        event: int,
+        x: int,
+        y: int,
+        flags: int,
+        param: object,
+    ) -> None:
         """Handle mouse events for region selection.
 
         Args:
